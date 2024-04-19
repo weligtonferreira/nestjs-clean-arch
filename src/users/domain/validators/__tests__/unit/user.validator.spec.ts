@@ -12,6 +12,14 @@ describe('UserValidator unit tests', () => {
     sut = UserValidatorFactory.create();
   });
 
+  it('Valid cases for user validator class', () => {
+    const props = UserDataBuilder({});
+
+    const isValid = sut.validate(props);
+    expect(isValid).toBeTruthy();
+    expect(sut.validatedData).toStrictEqual(new UserRules(props));
+  });
+
   describe('Name field', () => {
     it('Invalid cases for name field', () => {
       let isValid = sut.validate(null as any);
@@ -45,14 +53,6 @@ describe('UserValidator unit tests', () => {
       expect(sut.errors['name']).toStrictEqual([
         'name must be shorter than or equal to 255 characters',
       ]);
-    });
-
-    it('Valid cases for name field', () => {
-      const props = UserDataBuilder({});
-
-      const isValid = sut.validate(props);
-      expect(isValid).toBeTruthy();
-      expect(sut.validatedData).toStrictEqual(new UserRules(props));
     });
   });
 });
