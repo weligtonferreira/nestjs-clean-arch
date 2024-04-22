@@ -45,8 +45,8 @@ describe('UserEntity unit tests', () => {
 
   it('Setter of password field', () => {
     sut['password'] = 'other password';
-    expect(sut.props.name).toEqual('other password');
-    expect(typeof sut.props.name).toBe('string');
+    expect(sut.props.password).toEqual('other password');
+    expect(typeof sut.props.password).toBe('string');
   });
 
   it('Getter of createdAt field', () => {
