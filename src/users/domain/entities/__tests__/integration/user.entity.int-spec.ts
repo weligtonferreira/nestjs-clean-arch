@@ -94,7 +94,7 @@ describe('UserEntity integration tests', () => {
       expect(() => new UserEntity(props)).toThrow(EntityValidationError);
     });
 
-    it('Should throw an error when creating a user with invalid createdAt', () => {
+    it('Should throw an error when updating a user with invalid name', () => {
       let props: UserProps = {
         ...UserDataBuilder({}),
         createdAt: '2024-04-22' as any,
@@ -118,6 +118,19 @@ describe('UserEntity integration tests', () => {
       };
 
       new UserEntity(props);
+    });
+  });
+
+  describe('Update method', () => {
+    it('Should throw an error when updating a user with invalid name', () => {
+      const entity = new UserEntity(UserDataBuilder({}));
+
+      expect(() => entity.update(null)).toThrow(EntityValidationError);
+      expect(() => entity.update('')).toThrow(EntityValidationError);
+      expect(() => entity.update(10 as any)).toThrow(EntityValidationError);
+      expect(() => entity.update('a'.repeat(256))).toThrow(
+        EntityValidationError,
+      );
     });
   });
 });
