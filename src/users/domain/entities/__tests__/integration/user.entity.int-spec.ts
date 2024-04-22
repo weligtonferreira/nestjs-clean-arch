@@ -144,4 +144,19 @@ describe('UserEntity integration tests', () => {
       entity.update('other name');
     });
   });
+
+  describe('Update password method', () => {
+    it('Should generate an error when trying to update a user password with an invalid password', () => {
+      const entity = new UserEntity(UserDataBuilder({}));
+
+      expect(() => entity.updatePassword(null)).toThrow(EntityValidationError);
+      expect(() => entity.updatePassword('')).toThrow(EntityValidationError);
+      expect(() => entity.updatePassword(10 as any)).toThrow(
+        EntityValidationError,
+      );
+      expect(() => entity.updatePassword('a'.repeat(101))).toThrow(
+        EntityValidationError,
+      );
+    });
+  });
 });
