@@ -131,6 +131,17 @@ describe('UserEntity integration tests', () => {
       expect(() => entity.update('a'.repeat(256))).toThrow(
         EntityValidationError,
       );
+
+      it('Should update user if data is valid', () => {
+        expect.assertions(0);
+
+        const props: UserProps = {
+          ...UserDataBuilder({}),
+        };
+
+        const entity = new UserEntity(props);
+        entity.update('other name');
+      });
     });
   });
 });
