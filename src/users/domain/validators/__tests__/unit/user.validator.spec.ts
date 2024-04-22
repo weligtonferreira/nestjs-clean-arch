@@ -4,17 +4,18 @@ import {
   UserValidator,
   UserValidatorFactory,
 } from '../../user.validator';
+import { UserProps } from '@/users/domain/entities/user.entity';
 
 let sut: UserValidator;
+let props: UserProps;
 
 describe('UserValidator unit tests', () => {
   beforeEach(() => {
     sut = UserValidatorFactory.create();
+    props = UserDataBuilder({});
   });
 
   it('Valid cases for user validator class', () => {
-    const props = UserDataBuilder({});
-
     const isValid = sut.validate(props);
     expect(isValid).toBeTruthy();
     expect(sut.validatedData).toStrictEqual(new UserRules(props));
