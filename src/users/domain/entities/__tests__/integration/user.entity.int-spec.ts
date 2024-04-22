@@ -158,5 +158,16 @@ describe('UserEntity integration tests', () => {
         EntityValidationError,
       );
     });
+
+    it('Should update user password if new password is valid', () => {
+      expect.assertions(0);
+
+      const props: UserProps = {
+        ...UserDataBuilder({}),
+      };
+
+      const entity = new UserEntity(props);
+      entity.updatePassword('other password');
+    });
   });
 });
