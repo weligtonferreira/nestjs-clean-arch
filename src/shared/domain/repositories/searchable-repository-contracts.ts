@@ -18,7 +18,7 @@ export class SearchParams {
   protected _sortDir: SortDirection | null;
   protected _filter: string | null;
 
-  constructor(props: SearchProps) {
+  constructor(props: SearchProps = {}) {
     this.page = props.page;
     this.perPage = props.perPage;
     this.sort = props.sort;
