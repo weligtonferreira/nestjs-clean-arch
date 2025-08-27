@@ -29,11 +29,11 @@ export class SearchParams {
   protected _filter: string | null;
 
   constructor(props: SearchProps = {}) {
-    this.page = props.page;
-    this.perPage = props.perPage;
-    this.sort = props.sort;
-    this.sortDir = props.sortDir;
-    this.filter = props.filter;
+    this._page = props.page;
+    this._perPage = props.perPage;
+    this._sort = props.sort;
+    this._sortDir = props.sortDir;
+    this._filter = props.filter;
   }
 
   get page() {
@@ -142,5 +142,6 @@ export interface SearchableRepositoryInterface<
   SearchInput = SearchParams,
   SearchOutput = SearchResult<E, Filter>,
 > extends RepositoryInterface<E> {
+  sortableFields: string[];
   search(props: SearchInput): Promise<SearchOutput>;
 }
