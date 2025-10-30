@@ -15,7 +15,7 @@ export class UserInMemoryRepository
     const entity = this.items.find(item => item.email === email);
 
     if (!entity) {
-      throw new NotFoundError(`Entity not found using email: ${entity.email}`);
+      throw new NotFoundError(`Entity not found using email: ${email}`);
     }
 
     return entity;
