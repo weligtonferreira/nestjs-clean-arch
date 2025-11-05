@@ -7,7 +7,7 @@ import { UserInMemoryRepository } from '../../user-in-memory.repository';
 describe('UserInMemoryRepository unit tests', () => {
   let sut: UserInMemoryRepository;
 
-  beforeAll(() => {
+  beforeEach(() => {
     sut = new UserInMemoryRepository();
   });
 
