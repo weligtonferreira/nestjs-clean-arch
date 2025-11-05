@@ -1,3 +1,4 @@
+import type { HashProvider } from '@/shared/application/providers/hash-provider';
 import { UserEntity } from '@/users/domain/entities/user.entity';
 import type { UserRepository } from '@/users/domain/repositories/user.repository';
 import { BadRequestError } from '../errors/bad-request-error';
@@ -17,7 +18,10 @@ export type SignupOutput = {
 };
 
 export class SignupUseCase {
-  constructor(private userRespository: UserRepository.Repository) {}
+  constructor(
+    private userRespository: UserRepository.Repository,
+    private hashProvider: HashProvider,
+  ) {}
 
   async execute(input: SignupInput): Promise<SignupOutput> {
     const requiredFields: (keyof SignupInput)[] = ['name', 'email', 'password'];
@@ -30,7 +34,9 @@ export class SignupUseCase {
 
     await this.userRespository.findByEmail(input.email);
 
-    const entity = new UserEntity(input);
+    const hashPassword = await this.hashProvider.generateHash(input.password);
+
+    const entity = new UserEntity({ ...input, password: hashPassword });
 
     await this.userRespository.insert(entity);
 
