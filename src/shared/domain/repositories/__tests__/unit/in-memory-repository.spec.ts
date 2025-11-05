@@ -14,7 +14,7 @@ class StubInMemoryRepository extends InMemoryRepository<StubEntity> {}
 describe('InMemoryRepository unit tests', () => {
   let sut: StubInMemoryRepository;
 
-  beforeAll(() => {
+  beforeEach(() => {
     sut = new StubInMemoryRepository();
   });
 
