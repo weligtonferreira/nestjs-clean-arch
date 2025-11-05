@@ -32,7 +32,7 @@ export class SignupUseCase {
       throw new BadRequestError(`Missing fields: ${missing.join(', ')}`);
     }
 
-    await this.userRespository.findByEmail(input.email);
+    await this.userRespository.emailExists(input.email);
 
     const hashPassword = await this.hashProvider.generateHash(input.password);
 
